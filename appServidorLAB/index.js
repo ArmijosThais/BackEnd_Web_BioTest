@@ -14,7 +14,10 @@ app.get('/', (req,res) => {
     res.send('hola mundo :3')
 })
 
-app.use('/api/pacientes/', require('./routes/PatientRoute'))
+app.use('/api/pacientes', require('./routes/PatientRoute'))
+app.use('/api/atenciones', require('./routes/AttentionRoutes'))
+app.use('/api/atencionesDet', require('./routes/AttentionDetRoutes'))
+app.use('/api/examenes', require('./routes/ExamRoutes'))
 
 //permite al servidor escuchar en un puerto especifico para levantarse
 app.listen(4500, ()=>{

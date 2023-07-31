@@ -16,7 +16,7 @@ exports.addPatient = async(req, res) => {
 exports.loadPatients = async(req, res) => {
     try {
         const patients = await Patient.find()
-        res.json(patients)
+        res.json(patients) 
     } catch (error) {
         console.log(error)
         res.status(500).send('Hubo un error al cargar el listado de pacientes') //ERROR 500->Error interno del servidor
@@ -27,7 +27,7 @@ exports.loadPatient = async(req, res) => {
     try {
         let patient = await Patient.findById(req.params.id)
         if(!patient){
-            res.status(404).json({msg: 'No existe el Paciente'})
+            res.status(404).json({msg: 'No existe el paciente'})
         }
         res.json(patient)
     } catch (error) {
@@ -38,11 +38,12 @@ exports.loadPatient = async(req, res) => {
 
 exports.updatePatient = async(req, res) => {
     try {
-        const {name, lastname, phone, address } = req.body
+        const {id, name, lastname, phone, address } = req.body
         let patient = await Patient.findById(req.params.id)
         if(!patient){
             res.status(404).json({msg: 'No existe el Paciente'})
         }
+        patient.id = id
         patient.name = name
         patient.lastname = lastname
         patient.phone = phone
